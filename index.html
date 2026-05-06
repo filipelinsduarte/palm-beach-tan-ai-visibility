@@ -619,7 +619,7 @@ function setTimeRange(range,btn){
 }
 
 function setBrand(b,btn){currentBrand=b;sortCol='visibility';sortDir='desc';['prompt','visibility','position','sentiment','competitors'].forEach(function(c){var arr=document.getElementById('sa-'+c);var th=document.getElementById('th-'+c);if(!arr||!th)return;if(c==='visibility'){th.classList.add('sorted');arr.classList.add('sorted');arr.innerHTML='&#8595;';}else{th.classList.remove('sorted');arr.classList.remove('sorted');arr.innerHTML='&#8597;';}});document.querySelectorAll('.bt-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');_applyTimeRange();renderAll();}
-function setModel(m,btn){activeModel=m;document.querySelectorAll('.mb-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderAll();}
+function setModel(m,btn){activeModel=m;document.querySelectorAll('.mb-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderAll();const sp=document.getElementById('panel-social');if(sp&&sp.classList.contains('active'))renderSocial();}
 function switchTab(t,btn){document.querySelectorAll('.stab').forEach(x=>x.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));document.getElementById('panel-'+t).classList.add('active');if(t==='social')renderSocial();}
 function renderAll(){renderStats();renderOverview();renderPrompts();renderSentiment();renderCompetitors();renderCitations();renderActionsGrid();}
 function fav(d,sz){return 'https://www.google.com/s2/favicons?domain='+d+'&sz='+(sz||32);}
@@ -1312,39 +1312,35 @@ _applyTimeRange();
 renderAll();
 
 
+
 /* ── Social Media Tab ─────────────────────────────────────────────────────── */
 const SM_PROFILES = {
-  // Instagram
-  "denvertanningclub":{"name":"Denver Tanning Club","handle":"@denvertanningclub","type":"business","followers":2405,"location":"Denver, CO","platform":"instagram"},
-  "goldenhour_denver":{"name":"Golden Hour Denver","handle":"@goldenhour_denver","type":"business","followers":2824,"location":"Denver, CO","platform":"instagram"},
-  "dayglowtans":{"name":"Day Glow Tans (Katie Day)","handle":"@dayglowtans","type":"creator","followers":1143,"location":"Denver, CO","platform":"instagram"},
-  "sunstudiotan614":{"name":"Sun Studio Tan","handle":"@sunstudiotan614","type":"business","followers":104,"location":"Columbus, OH","platform":"instagram"},
-  "the.bronzing.bar":{"name":"The Bronzing Bar","handle":"@the.bronzing.bar","type":"business","followers":4487,"location":"Columbus, OH","platform":"instagram"},
-  "sweetlybronzed":{"name":"Sweetly Bronzed","handle":"@sweetlybronzed","type":"business","followers":5277,"location":"Columbus, OH","platform":"instagram"},
-  "ontheglowcustomspraytanning":{"name":"On The Glow (Cassie)","handle":"@ontheglowcustomspraytanning","type":"creator","followers":718,"location":"Columbus, OH","platform":"instagram"},
-  "flawlesstansdallas":{"name":"Flawless Tans Dallas","handle":"@flawlesstansdallas","type":"business","followers":5077,"location":"Dallas, TX","platform":"instagram"},
-  "bronzebeautybardtx":{"name":"Bronze Beauty Bar","handle":"@bronzebeautybardtx","type":"business","followers":3411,"location":"Dallas, TX","platform":"instagram"},
-  "tan_dallas":{"name":"Tan Dallas","handle":"@tan_dallas","type":"business","followers":189,"location":"Dallas, TX","platform":"instagram"},
-  "glowjobdallas":{"name":"Glow Job Dallas","handle":"@glowjobdallas","type":"business","followers":4547,"location":"Dallas, TX","platform":"instagram"},
-  // Facebook pages
-  "sinlesssun":{"name":"Sinless Sun Spray Tanning","handle":"sinlesssun","type":"business","followers":3700,"location":"Denver, CO","platform":"facebook"},
-  "leetsdale":{"name":"Glo Tanning (Leetsdale)","handle":"leetsdale","type":"business","followers":291,"location":"Denver, CO","platform":"facebook"},
-  "tanning.denver":{"name":"Glo Tanning Colorado","handle":"tanning.denver","type":"business","followers":8100,"location":"Denver, CO","platform":"facebook"},
-  "bringmebronze":{"name":"Bring Me Bronze","handle":"bringmebronze","type":"business","followers":488,"location":"Denver, CO","platform":"facebook"},
-  "Illbeyourweakness":{"name":"Radiance Tan","handle":"Illbeyourweakness","type":"business","followers":null,"location":"Columbus, OH","platform":"facebook"},
-  "solairesunspray":{"name":"Solaire Sun Spray","handle":"solairesunspray","type":"business","followers":1400,"location":"Columbus, OH","platform":"facebook"},
-  "tanatsunstudio":{"name":"Sun Studio Tan","handle":"tanatsunstudio","type":"business","followers":1800,"location":"Columbus, OH","platform":"facebook"},
-  "pureglowtanningmockingbirdstation":{"name":"PureGlow Tanning","handle":"pureglowtanningmockingbirdstation","type":"business","followers":null,"location":"Dallas, TX","platform":"facebook"},
-  "bronzebeautybardallas":{"name":"Bronze Beauty Bar Dallas","handle":"bronzebeautybardallas","type":"business","followers":167,"location":"Dallas, TX","platform":"facebook"},
-  "thebronzebabe":{"name":"The Bronze Babe","handle":"thebronzebabe","type":"business","followers":null,"location":"Dallas, TX","platform":"facebook"},
-  // Facebook communities
-  "395341440904564":{"name":"Denver Spray Tan Community","handle":"Facebook Group","type":"community","followers":null,"location":"Denver, CO","platform":"facebook"},
-  "BackMountainCommunityPage":{"name":"Back Mountain Community","handle":"Facebook Group","type":"community","followers":null,"location":"Dallas, TX","platform":"facebook"},
-  "whatshappeningindallasgeorgia":{"name":"What's Happening in Dallas","handle":"Facebook Group","type":"community","followers":null,"location":"Dallas, TX","platform":"facebook"},
-  // TikTok
-  "samanthataormina":{"name":"Samantha Taormina","handle":"@samanthataormina","type":"creator","followers":603600,"location":"US","platform":"tiktok"},
-  // YouTube
-  "_youtube_sunstudio":{"name":"Sun Studio Tan","handle":"YouTube Channel","type":"business","followers":null,"location":"Columbus, OH","platform":"youtube"}
+  "denvertanningclub":{"name":"Denver Tanning Club","handle":"@denvertanningclub","type":"business","subtype":"Tanning Salon","followers":2405,"location":"Denver, CO","platform":"instagram"},
+  "goldenhour_denver":{"name":"Golden Hour Denver","handle":"@goldenhour_denver","type":"business","subtype":"Spray Tan Studio","followers":2824,"location":"Denver, CO","platform":"instagram"},
+  "dayglowtans":{"name":"Day Glow Tans","handle":"@dayglowtans","type":"creator","subtype":"Mobile Artist","followers":1143,"location":"Denver, CO","platform":"instagram"},
+  "sunstudiotan614":{"name":"Sun Studio Tan","handle":"@sunstudiotan614","type":"business","subtype":"Tanning Salon","followers":104,"location":"Columbus, OH","platform":"instagram"},
+  "the.bronzing.bar":{"name":"The Bronzing Bar","handle":"@the.bronzing.bar","type":"business","subtype":"Spray Tan Studio","followers":4487,"location":"Columbus, OH","platform":"instagram"},
+  "sweetlybronzed":{"name":"Sweetly Bronzed","handle":"@sweetlybronzed","type":"business","subtype":"Spray Tan Studio","followers":5277,"location":"Columbus, OH","platform":"instagram"},
+  "ontheglowcustomspraytanning":{"name":"On The Glow","handle":"@ontheglowcustomspraytanning","type":"creator","subtype":"Mobile Artist","followers":718,"location":"Columbus, OH","platform":"instagram"},
+  "flawlesstansdallas":{"name":"Flawless Tans Dallas","handle":"@flawlesstansdallas","type":"business","subtype":"Spray Tan Studio","followers":5077,"location":"Dallas, TX","platform":"instagram"},
+  "bronzebeautybardtx":{"name":"Bronze Beauty Bar","handle":"@bronzebeautybardtx","type":"business","subtype":"Spray Tan Studio","followers":3411,"location":"Dallas, TX","platform":"instagram"},
+  "tan_dallas":{"name":"Tan Dallas","handle":"@tan_dallas","type":"business","subtype":"Tanning Salon","followers":189,"location":"Dallas, TX","platform":"instagram"},
+  "glowjobdallas":{"name":"Glow Job Dallas","handle":"@glowjobdallas","type":"business","subtype":"Spray Tan Studio","followers":4547,"location":"Dallas, TX","platform":"instagram"},
+  "sinlesssun":{"name":"Sinless Sun Spray Tanning","handle":"sinlesssun","type":"business","subtype":"Spray Tan Studio","followers":3700,"location":"Denver, CO","platform":"facebook"},
+  "leetsdale":{"name":"Glo Tanning (Leetsdale)","handle":"leetsdale","type":"business","subtype":"Tanning Salon","followers":291,"location":"Denver, CO","platform":"facebook"},
+  "tanning.denver":{"name":"Glo Tanning Colorado","handle":"tanning.denver","type":"business","subtype":"Tanning Chain","followers":8100,"location":"Denver, CO","platform":"facebook"},
+  "bringmebronze":{"name":"Bring Me Bronze","handle":"bringmebronze","type":"business","subtype":"Spray Tan Studio","followers":488,"location":"Denver, CO","platform":"facebook"},
+  "Illbeyourweakness":{"name":"Radiance Tan","handle":"Illbeyourweakness","type":"business","subtype":"Tanning Salon","followers":null,"location":"Columbus, OH","platform":"facebook"},
+  "solairesunspray":{"name":"Solaire Sun Spray","handle":"solairesunspray","type":"business","subtype":"Spray Tan Studio","followers":1400,"location":"Columbus, OH","platform":"facebook"},
+  "tanatsunstudio":{"name":"Sun Studio Tan","handle":"tanatsunstudio","type":"business","subtype":"Tanning Salon","followers":1800,"location":"Columbus, OH","platform":"facebook"},
+  "pureglowtanningmockingbirdstation":{"name":"PureGlow Tanning","handle":"pureglowtanningmockingbirdstation","type":"business","subtype":"Spray Tan Studio","followers":null,"location":"Dallas, TX","platform":"facebook"},
+  "bronzebeautybardallas":{"name":"Bronze Beauty Bar Dallas","handle":"bronzebeautybardallas","type":"business","subtype":"Spray Tan Studio","followers":167,"location":"Dallas, TX","platform":"facebook"},
+  "thebronzebabe":{"name":"The Bronze Babe","handle":"thebronzebabe","type":"business","subtype":"Spray Tan Studio","followers":null,"location":"Dallas, TX","platform":"facebook"},
+  "395341440904564":{"name":"Denver Spray Tan Community","handle":"Community Group","type":"community","subtype":"Community Group","followers":null,"location":"Denver, CO","platform":"facebook"},
+  "BackMountainCommunityPage":{"name":"Back Mountain Community","handle":"Community Group","type":"community","subtype":"Community Group","followers":null,"location":"Dallas, TX","platform":"facebook"},
+  "whatshappeningindallasgeorgia":{"name":"What's Happening in Dallas","handle":"Community Group","type":"community","subtype":"Community Group","followers":null,"location":"Dallas, TX","platform":"facebook"},
+  "samanthataormina":{"name":"Samantha Taormina","handle":"@samanthataormina","type":"creator","subtype":"Beauty Creator","followers":603600,"location":"US","platform":"tiktok"},
+  "_youtube_sunstudio":{"name":"Sun Studio Tan","handle":"YouTube Channel","type":"business","subtype":"Tanning Salon","followers":null,"location":"Columbus, OH","platform":"youtube"}
 };
 
 const SM_PLAT_COLORS = {
@@ -1363,9 +1359,16 @@ const SM_MODEL_META = {
 };
 
 let smActivePlat = 'all';
-let smSortCol = 'cites';
+let smSortCol = 'followers';
 let smSortDir = -1;
-let smExpandedRows = new Set();
+
+function _smGetPlatform(url) {
+  if (/instagram\.com/i.test(url)) return 'instagram';
+  if (/facebook\.com/i.test(url)) return 'facebook';
+  if (/tiktok\.com/i.test(url)) return 'tiktok';
+  if (/^https?:\/\/(www\.)?youtube\.com/i.test(url)) return 'youtube';
+  return null;
+}
 
 function _smExtractHandle(url, platform) {
   try {
@@ -1378,80 +1381,54 @@ function _smExtractHandle(url, platform) {
     if (platform === 'facebook') {
       if (parts[0] === 'groups') return parts[1] || '__group__';
       if (parts[0] === 'pages') return parts[1] || '__page__';
-      if (parts.length && !['share','sharer','login','watch'].includes(parts[0])) {
-        const slug = parts[0];
-        // exclude numeric-only (not group IDs already handled)
-        return slug;
-      }
+      if (parts.length && !['share','sharer','login','watch'].includes(parts[0])) return parts[0];
       return '__unknown__';
     }
-    if (platform === 'tiktok') {
-      const h = parts[0];
-      return h ? h.replace('@','') : '__unknown__';
-    }
-    if (platform === 'youtube') {
-      return '_youtube_sunstudio';
-    }
+    if (platform === 'tiktok') return (parts[0]||'').replace('@','') || '__unknown__';
+    if (platform === 'youtube') return '_youtube_sunstudio';
   } catch(e) {}
   return '__unknown__';
 }
 
-function _smGetPlatform(url) {
-  if (/instagram\.com/i.test(url)) return 'instagram';
-  if (/facebook\.com/i.test(url)) return 'facebook';
-  if (/tiktok\.com/i.test(url)) return 'tiktok';
-  // YouTube: only match youtube.com as a full domain, not substring
-  if (/(?:^|\.)youtube\.com/i.test(url) || url === 'https://youtube.com') return 'youtube';
-  return null;
-}
-
 function _smBuildData() {
   const rh = RAW_HISTORY[Object.keys(RAW_HISTORY)[0]];
-  const byHandle = {}; // handle -> {platform, handle, cites, models:Set, citationsList:[]}
+  const byHandle = {};
 
   for (const prompt of rh.prompts) {
     for (const entry of (prompt.entries || [])) {
       const model = entry.model || entry.mdl || 'unknown';
+      // Apply global model filter
+      if (activeModel !== 'all' && model !== activeModel) continue;
       for (const src of (entry.srcs || [])) {
         const url = src.u || '';
         const plat = _smGetPlatform(url);
         if (!plat) continue;
         const handle = _smExtractHandle(url, plat);
-        const key = handle === '__post__' ? `__ig_post__${url.slice(-12)}` : handle;
-        if (!byHandle[key]) {
-          byHandle[key] = {handle: key, platform: plat, cites:0, models: new Set(), citationsList:[]};
-        }
+        const key = handle === '__post__' ? `__ig_post__${url.slice(-16)}` : handle;
+        if (!byHandle[key]) byHandle[key] = {handle:key, platform:plat, cites:0, models:new Set(), citationsList:[]};
         byHandle[key].cites++;
         byHandle[key].models.add(model);
-        // avoid duplicate prompt+model+url
-        const dup = byHandle[key].citationsList.find(c => c.url===url && c.model===model);
-        if (!dup) {
-          byHandle[key].citationsList.push({
-            prompt: prompt.text || '',
-            url,
-            title: src.t || '',
-            model,
-            date: entry.date || ''
-          });
+        if (!byHandle[key].citationsList.find(c => c.url===url && c.model===model)) {
+          byHandle[key].citationsList.push({prompt:prompt.text||'', url, title:src.t||'', model, date:entry.date||''});
         }
       }
     }
   }
 
-  // Merge with profile data
   return Object.values(byHandle).map(row => {
-    const prof = SM_PROFILES[row.handle] || SM_PROFILES[row.handle.replace('@','')] || null;
-    const isPost = row.handle.startsWith('__ig_post__') || row.handle.startsWith('__');
+    const prof = SM_PROFILES[row.handle] || null;
+    const isPost = row.handle.startsWith('__');
     return {
       ...row,
       models: [...row.models],
       name: prof ? prof.name : (isPost ? 'Post / Reel' : row.handle),
       type: prof ? prof.type : (isPost ? 'post' : 'business'),
+      subtype: prof ? prof.subtype : (isPost ? 'Post / Reel' : 'Business Page'),
       followers: prof ? prof.followers : null,
       location: prof ? prof.location : '',
-      profileUrl: row.platform === 'instagram' ? `https://instagram.com/${row.handle}` :
-                  row.platform === 'facebook' ? `https://facebook.com/${row.handle}` :
-                  row.platform === 'tiktok' ? `https://tiktok.com/@${row.handle}` : `https://youtube.com`
+      profileUrl: row.platform==='instagram' ? `https://instagram.com/${row.handle}` :
+                  row.platform==='facebook'  ? `https://facebook.com/${row.handle}` :
+                  row.platform==='tiktok'    ? `https://tiktok.com/@${row.handle}` : 'https://youtube.com'
     };
   });
 }
@@ -1461,119 +1438,129 @@ function renderSocial() {
   if (!el) return;
   const allRows = _smBuildData();
 
-  // Platform counts
-  const platCounts = {all: allRows.reduce((s,r)=>s+r.cites,0)};
-  for (const r of allRows) platCounts[r.platform] = (platCounts[r.platform]||0) + r.cites;
-  const accountCounts = {all: allRows.length};
-  for (const r of allRows) accountCounts[r.platform] = (accountCounts[r.platform]||0) + 1;
+  // Platform counts (unfiltered by model for pill counts)
+  const platCounts = {};
+  const allRowsUnfiltered = (function(){
+    const rh = RAW_HISTORY[Object.keys(RAW_HISTORY)[0]];
+    const seen = {};
+    for (const prompt of rh.prompts)
+      for (const entry of (prompt.entries||[]))
+        for (const src of (entry.srcs||[])) {
+          const plat = _smGetPlatform(src.u||'');
+          if (plat) seen[plat] = (seen[plat]||0)+1;
+        }
+    return seen;
+  })();
+  const totalUnfiltered = Object.values(allRowsUnfiltered).reduce((s,v)=>s+v,0);
 
   const filtered = smActivePlat === 'all' ? allRows : allRows.filter(r => r.platform === smActivePlat);
   const maxCites = filtered.reduce((m,r) => Math.max(m, r.cites), 0);
 
   const sorted = [...filtered].sort((a,b) => {
-    if (smSortCol === 'cites') return smSortDir * (b.cites - a.cites);
-    if (smSortCol === 'followers') {
-      const af = a.followers ?? -1, bf = b.followers ?? -1;
-      return smSortDir * (bf - af);
-    }
-    if (smSortCol === 'platform') return smSortDir * a.platform.localeCompare(b.platform);
-    if (smSortCol === 'name') return smSortDir * a.name.localeCompare(b.name);
-    if (smSortCol === 'type') return smSortDir * (a.type||'').localeCompare(b.type||'');
-    return 0;
+    let av, bv;
+    if (smSortCol === 'cites') { av=a.cites; bv=b.cites; }
+    else if (smSortCol === 'followers') { av=a.followers??-1; bv=b.followers??-1; }
+    else if (smSortCol === 'platform') { av=a.platform; bv=b.platform; return smSortDir*(av<bv?-1:av>bv?1:0); }
+    else if (smSortCol === 'name') { av=a.name; bv=b.name; return smSortDir*(av<bv?-1:av>bv?1:0); }
+    else if (smSortCol === 'type') { av=a.subtype; bv=b.subtype; return smSortDir*(av<bv?-1:av>bv?1:0); }
+    else { av=a.cites; bv=b.cites; }
+    return smSortDir*(bv-av);
   });
 
   const fmtFollowers = n => {
-    if (n === null || n === undefined) return '<span class="sm-followers-na">N/A</span>';
-    if (n >= 1000000) return '<span class="sm-followers">'+(n/1000000).toFixed(1)+'M</span>';
-    if (n >= 1000) return '<span class="sm-followers">'+(n/1000).toFixed(1)+'K</span>';
+    if (n===null||n===undefined) return '<span class="sm-followers-na">N/A</span>';
+    if (n>=1000000) return '<span class="sm-followers">'+(n/1000000).toFixed(1)+'M</span>';
+    if (n>=1000) return '<span class="sm-followers">'+(n/1000).toFixed(1)+'K</span>';
     return '<span class="sm-followers">'+n.toLocaleString()+'</span>';
   };
 
+  // Platform filter pills — counts reflect current model filter
+  const modelFilteredPlatCounts = allRows.reduce((acc,r)=>{acc[r.platform]=(acc[r.platform]||0)+r.cites;return acc;},{});
+  const totalFiltered = Object.values(modelFilteredPlatCounts).reduce((s,v)=>s+v,0);
+
   const platBtns = ['all','instagram','facebook','youtube','tiktok'].map(p => {
-    const pc = SM_PLAT_COLORS[p] || {};
-    const ac = p === 'all' ? '#6366f1' : pc.color;
-    const cnt = platCounts[p] || 0;
-    if (p !== 'all' && !cnt) return '';
-    const ico = p === 'all' ? '' : `<img src="https://www.google.com/s2/favicons?domain=${pc.domain}&sz=32" onerror="this.style.display='none'">`;
-    const lbl = p === 'all' ? 'All Platforms' : pc.label;
+    const pc = SM_PLAT_COLORS[p]||{};
+    const ac = p==='all' ? '#6366f1' : pc.color;
+    const cnt = p==='all' ? totalFiltered : (modelFilteredPlatCounts[p]||0);
+    if (p!=='all' && !cnt) return '';
+    const ico = p==='all' ? '' : `<img src="https://www.google.com/s2/favicons?domain=${pc.domain}&sz=32" onerror="this.style.display='none'">`;
     return `<button class="sm-fbtn${smActivePlat===p?' active':''}" style="--ac:${ac}" onclick="smSetPlat('${p}',this)">
-      ${ico}<span>${lbl}</span><span class="sm-pill-count" style="--ac:${ac}">${cnt}</span>
+      ${ico}<span>${p==='all'?'All Platforms':pc.label}</span><span class="sm-pill-count" style="--ac:${ac}">${cnt}</span>
     </button>`;
   }).join('');
 
-  const thArr = [
-    {k:'platform',l:'Platform'},
+  const thDefs = [
+    {k:'__expand__',l:''},
     {k:'name',l:'Account / Handle'},
-    {k:'type',l:'Type'},
+    {k:'type',l:'Account Type'},
+    {k:'platform',l:'Platform'},
     {k:'followers',l:'Followers'},
     {k:'cites',l:'AI Cites'},
-    {k:'models_',l:'AI Models'},
-    {k:'location_',l:'City'}
+    {k:'__models__',l:'AI Models'},
+    {k:'__location__',l:'City'}
   ];
-  const ths = thArr.map(h => {
-    if (h.k.endsWith('_')) return `<th>${h.l}</th>`;
+  const ths = thDefs.map(h => {
+    if (h.k.startsWith('__')) return `<th style="${h.k==='__expand__'?'width:32px':''}">${h.l}</th>`;
     const arr = smSortCol===h.k ? (smSortDir<0?'▼':'▲') : '⇅';
-    return `<th onclick="smSetSort('${h.k}')">${h.l} <span style="opacity:.5;font-size:9px">${arr}</span></th>`;
+    return `<th onclick="smSetSort('${h.k}')" style="cursor:pointer">${h.l} <span style="opacity:.45;font-size:9px">${arr}</span></th>`;
   }).join('');
 
   const rows = sorted.map((r,i) => {
-    const pc = SM_PLAT_COLORS[r.platform] || {color:'#888',bg:'#f0f0f0',label:r.platform,domain:r.platform+'.com'};
+    const pc = SM_PLAT_COLORS[r.platform]||{color:'#888',bg:'#f0f0f0',label:r.platform,domain:r.platform+'.com'};
     const platBadge = `<span class="sm-plat-badge" style="color:${pc.color};background:${pc.bg};border-color:${pc.color}22">
       <img src="https://www.google.com/s2/favicons?domain=${pc.domain}&sz=32" style="width:12px;height:12px;border-radius:2px" onerror="this.style.display='none'">
       ${pc.label}
     </span>`;
 
-    const typeCls = r.type === 'creator' ? 'sm-type-creator' : r.type === 'community' ? 'sm-type-community' : 'sm-type-business';
-    const typeLabel = r.type === 'creator' ? 'Creator' : r.type === 'community' ? 'Community' : 'Business';
-    const typeBadge = `<span class="sm-type-badge ${typeCls}">${typeLabel}</span>`;
+    const typeCls = r.type==='creator' ? 'sm-type-creator' : r.type==='community' ? 'sm-type-community' : 'sm-type-business';
+    const typeBadge = `<span class="sm-type-badge ${typeCls}">${r.subtype}</span>`;
 
-    const avatarDomain = r.platform === 'instagram' ? 'instagram.com' :
-                         r.platform === 'facebook' ? 'facebook.com' :
-                         r.platform === 'tiktok' ? 'tiktok.com' : 'youtube.com';
     const handleDisplay = r.handle.startsWith('__ig_post__') ? 'Post / Reel' : r.handle;
-    const handleLink = r.handle.startsWith('__') ? '' : ` href="${r.profileUrl}" target="_blank" rel="noopener"`;
-
+    const hasLink = !r.handle.startsWith('__');
     const handleCell = `<div class="sm-handle-cell">
-      <img class="sm-avatar" src="https://www.google.com/s2/favicons?domain=${avatarDomain}&sz=32" onerror="this.style.display='none'" style="border-radius:6px;width:32px;height:32px">
+      <img src="https://www.google.com/s2/favicons?domain=${pc.domain}&sz=32" onerror="this.style.display='none'" style="width:32px;height:32px;border-radius:6px;flex-shrink:0;background:var(--surface-alt)">
       <div>
-        <a${handleLink} style="font-size:13px;font-weight:600;color:var(--ink);text-decoration:none">${r.name}</a>
-        <span class="sm-handle-sub">${handleDisplay}</span>
+        ${hasLink ? `<a href="${r.profileUrl}" target="_blank" rel="noopener" style="font-size:13px;font-weight:600;color:var(--ink);text-decoration:none">${r.name}</a>` : `<span style="font-size:13px;font-weight:600;color:var(--ink)">${r.name}</span>`}
+        <span style="font-size:11px;color:var(--ink4);display:block">${handleDisplay}</span>
       </div>
     </div>`;
 
     const modelDots = r.models.map(m => {
-      const mm = SM_MODEL_META[m] || {label:m,domain:'google.com'};
-      return `<img class="sm-mdot" src="https://www.google.com/s2/favicons?domain=${mm.domain}&sz=32" title="${mm.label}" onerror="this.style.display='none'" style="width:18px;height:18px;border-radius:3px">`;
+      const mm = SM_MODEL_META[m]||{label:m,domain:'google.com'};
+      return `<img src="https://www.google.com/s2/favicons?domain=${mm.domain}&sz=32" title="${mm.label}" onerror="this.style.display='none'" style="width:18px;height:18px;border-radius:3px;flex-shrink:0">`;
     }).join('');
 
     const isHigh = r.cites >= Math.max(2, maxCites * 0.5);
     const citeBadge = `<span class="sm-cite-num${isHigh?' high':''}">${r.cites}</span>`;
 
     const expandId = `sm-exp-${i}`;
-    const citationsHtml = r.citationsList.slice(0,8).map(c => {
-      const mm = SM_MODEL_META[c.model] || {label:c.model,domain:'google.com'};
-      const shortUrl = c.url.replace(/^https?:\/\//,'').slice(0,70) + (c.url.length > 75 ? '…' : '');
+    const citationsHtml = r.citationsList.map(c => {
+      const mm = SM_MODEL_META[c.model]||{label:c.model,domain:'google.com'};
+      const shortUrl = c.url.replace(/^https?:\/\//,'').slice(0,72)+(c.url.length>77?'…':'');
       return `<div class="sm-cite-item">
         <div>
           <div class="sm-cite-prompt">${c.prompt}</div>
           <a href="${c.url}" target="_blank" rel="noopener" class="sm-cite-url">${shortUrl}</a>
-          ${c.title ? `<span style="font-size:11px;color:var(--ink3);display:block;margin-top:2px">${c.title.slice(0,90)}</span>` : ''}
+          ${c.title?`<span style="font-size:11px;color:var(--ink3);display:block;margin-top:2px">${c.title.slice(0,90)}</span>`:''}
         </div>
-        <div class="sm-cite-model">${mm.label}</div>
+        <div style="display:flex;align-items:center;gap:4px;white-space:nowrap">
+          <img src="https://www.google.com/s2/favicons?domain=${mm.domain}&sz=32" style="width:14px;height:14px;border-radius:2px" onerror="this.style.display='none'">
+          <span class="sm-cite-model">${mm.label}</span>
+        </div>
       </div>`;
     }).join('');
 
-    const expandBtn = `<button class="sm-expand-toggle" onclick="smToggleExpand('${expandId}',this)" title="Show citations">▼ ${r.cites}</button>`;
+    const expandBtn = `<button class="sm-expand-toggle" onclick="smToggleExpand('${expandId}',this)" title="Show citations">▼</button>`;
 
     return `<tr class="sm-main" style="background:${i%2===0?'var(--paper)':'var(--surface)'}">
-      <td>${platBadge}</td>
+      <td style="width:32px;text-align:center">${expandBtn}</td>
       <td>${handleCell}</td>
       <td>${typeBadge}</td>
+      <td>${platBadge}</td>
       <td>${fmtFollowers(r.followers)}</td>
       <td>${citeBadge}</td>
-      <td><div class="sm-model-dots">${modelDots}</div></td>
+      <td><div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap">${modelDots}</div></td>
       <td style="color:var(--ink4);font-size:12px">${r.location}</td>
-      <td>${expandBtn}</td>
     </tr>
     <tr id="${expandId}" style="display:none">
       <td colspan="8"><div class="sm-expand-body">${citationsHtml}</div></td>
@@ -1581,28 +1568,29 @@ function renderSocial() {
   }).join('');
 
   const totalCites = filtered.reduce((s,r)=>s+r.cites,0);
+  const modelLabel = activeModel==='all' ? 'all models' : (SM_MODEL_META[activeModel]||{label:activeModel}).label;
 
   el.innerHTML = `
   <div class="cc">
     <div class="cc-head">
       <div>
         <div class="cc-title">Social Media Citations</div>
-        <div class="cc-sub">social accounts cited by AI models in Palm Beach Tan-related queries</div>
+        <div class="cc-sub">social accounts cited by AI models in Palm Beach Tan-related queries${activeModel!=='all'?' (filtered: '+modelLabel+')':''}</div>
       </div>
     </div>
     <div class="cc-body">
 
       <div class="sm-insight-box">
         <h4>Key Finding</h4>
-        <p>Palm Beach Tan has <strong>zero</strong> social media citations. Competitors' Instagram and Facebook profiles are being surfaced by Google AIO, Google AI Mode, and Perplexity across ${platCounts.all} citations — for prompts like "Best VersaSpa spray tan" and "Best tanning salon in Denver" where Palm Beach Tan should be the definitive answer.</p>
+        <p>Palm Beach Tan has <strong>zero</strong> social media citations. Competitors' Instagram and Facebook profiles are being surfaced by Google AIO, Google AI Mode, and Perplexity across ${totalUnfiltered} citations, for prompts like "Best VersaSpa spray tan" and "Best tanning salon in Denver" where Palm Beach Tan should be the definitive answer.</p>
       </div>
 
       <div class="sm-stats-band">
-        <div class="sm-stat-card"><div class="sm-stat-num">${platCounts.all||0}</div><div class="sm-stat-label">Total Citations</div></div>
-        <div class="sm-stat-card"><div class="sm-stat-num" style="color:#C13584">${platCounts.instagram||0}</div><div class="sm-stat-label">Instagram</div></div>
-        <div class="sm-stat-card"><div class="sm-stat-num" style="color:#1877F2">${platCounts.facebook||0}</div><div class="sm-stat-label">Facebook</div></div>
-        <div class="sm-stat-card"><div class="sm-stat-num" style="color:#FF0000">${platCounts.youtube||0}</div><div class="sm-stat-label">YouTube</div></div>
-        <div class="sm-stat-card"><div class="sm-stat-num" style="color:#010101">${platCounts.tiktok||0}</div><div class="sm-stat-label">TikTok</div></div>
+        <div class="sm-stat-card"><div class="sm-stat-num">${totalFiltered}</div><div class="sm-stat-label">Total Citations</div></div>
+        <div class="sm-stat-card"><div class="sm-stat-num" style="color:#C13584">${modelFilteredPlatCounts.instagram||0}</div><div class="sm-stat-label">Instagram</div></div>
+        <div class="sm-stat-card"><div class="sm-stat-num" style="color:#1877F2">${modelFilteredPlatCounts.facebook||0}</div><div class="sm-stat-label">Facebook</div></div>
+        <div class="sm-stat-card"><div class="sm-stat-num" style="color:#FF0000">${modelFilteredPlatCounts.youtube||0}</div><div class="sm-stat-label">YouTube</div></div>
+        <div class="sm-stat-card"><div class="sm-stat-num" style="color:#010101">${modelFilteredPlatCounts.tiktok||0}</div><div class="sm-stat-label">TikTok</div></div>
         <div class="sm-stat-card"><div class="sm-stat-num">${allRows.filter(r=>r.type==='creator').reduce((s,r)=>s+r.cites,0)}</div><div class="sm-stat-label">Creator Citations</div></div>
         <div class="sm-stat-card"><div class="sm-stat-num">${allRows.filter(r=>r.type==='business').reduce((s,r)=>s+r.cites,0)}</div><div class="sm-stat-label">Business Page Citations</div></div>
       </div>
@@ -1613,16 +1601,16 @@ function renderSocial() {
       </div>
 
       <div class="sm-results-bar">
-        <div class="sm-results-count">Showing <strong>${sorted.length}</strong> accounts &nbsp;·&nbsp; <strong>${totalCites}</strong> total AI citations</div>
+        <div class="sm-results-count">Showing <strong>${sorted.length}</strong> accounts &nbsp;·&nbsp; <strong>${totalCites}</strong> AI citations${activeModel!=='all'?' via '+modelLabel:''}</div>
         <div class="sm-sort-row">
           <span class="sm-sort-label">Sort:</span>
-          ${['cites','followers','name','type'].map(k=>`<button class="sm-sort-btn${smSortCol===k?' active':''}" onclick="smSetSort('${k}')">${k==='cites'?'Most Cited':k==='followers'?'Followers':k==='name'?'Name':'Type'}</button>`).join('')}
+          ${['followers','cites','name','type'].map(k=>`<button class="sm-sort-btn${smSortCol===k?' active':''}" onclick="smSetSort('${k}')">${k==='cites'?'Most Cited':k==='followers'?'Followers':k==='name'?'Name':'Type'}</button>`).join('')}
         </div>
       </div>
 
       <div style="overflow-x:auto">
         <table class="sm-table">
-          <thead><tr>${ths}<th></th></tr></thead>
+          <thead><tr>${ths}</tr></thead>
           <tbody>${rows}</tbody>
         </table>
       </div>
@@ -1630,15 +1618,14 @@ function renderSocial() {
   </div>`;
 }
 
-function smSetPlat(p, btn) {
+function smSetPlat(p) {
   smActivePlat = p;
-  smExpandedRows.clear();
   renderSocial();
 }
 
 function smSetSort(col) {
-  if (smSortCol === col) smSortDir *= -1;
-  else { smSortCol = col; smSortDir = -1; }
+  if (smSortCol===col) smSortDir*=-1;
+  else { smSortCol=col; smSortDir=-1; }
   renderSocial();
 }
 
@@ -1647,7 +1634,7 @@ function smToggleExpand(id, btn) {
   if (!row) return;
   const open = row.style.display !== 'none';
   row.style.display = open ? 'none' : 'table-row';
-  btn.textContent = open ? ('▼ ' + btn.textContent.split(' ')[1]) : ('▲ ' + btn.textContent.split(' ')[1]);
+  btn.textContent = open ? '▼' : '▲';
 }
 
 </script>
