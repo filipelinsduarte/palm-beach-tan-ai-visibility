@@ -248,6 +248,61 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
   .wrap,.header,.model-bar,.subnav{padding-left:14px;padding-right:14px}
 }
 @media(max-width:480px){.stat-row,.sent-tiles,.act-grid{grid-template-columns:1fr}}
+
+/* ── Social Media Tab ─────────────────────────────────────────────────────── */
+.sm-stats-band{display:flex;gap:16px;padding:20px 0 18px;flex-wrap:wrap}
+.sm-stat-card{display:flex;flex-direction:column;padding:14px 20px;background:var(--surface);border:1px solid var(--border);border-radius:8px;min-width:110px}
+.sm-stat-num{font-size:26px;font-weight:700;color:var(--ink);line-height:1}
+.sm-stat-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--ink4);margin-top:4px}
+.sm-filter-row{display:flex;align-items:center;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.sm-filter-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink4);white-space:nowrap}
+.sm-fbtn{display:inline-flex;align-items:center;gap:6px;padding:5px 12px 5px 8px;border-radius:20px;border:1.5px solid var(--border2);font-size:12px;font-weight:600;color:var(--ink3);background:var(--paper);cursor:pointer;transition:all .15s}
+.sm-fbtn img{width:14px;height:14px;border-radius:2px}
+.sm-fbtn:hover,.sm-fbtn.active{border-color:var(--ac,#6366f1);color:var(--ac,#6366f1);background:color-mix(in srgb,var(--ac,#6366f1) 8%,white)}
+.sm-fbtn.active{font-weight:700}
+.sm-pill-count{font-size:10px;font-weight:700;background:color-mix(in srgb,var(--ac,#6366f1) 14%,white);color:var(--ac,#6366f1);padding:1px 7px;border-radius:10px}
+.sm-results-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px}
+.sm-results-count{font-size:13px;color:var(--ink3);font-weight:500}
+.sm-results-count strong{color:var(--ink);font-weight:700}
+.sm-sort-row{display:flex;align-items:center;gap:6px}
+.sm-sort-label{font-size:11px;color:var(--ink4);font-weight:600}
+.sm-sort-btn{font-size:11px;font-weight:600;padding:4px 10px;border-radius:4px;border:1.5px solid var(--border);background:var(--paper);color:var(--ink3);cursor:pointer}
+.sm-sort-btn.active{border-color:#6366f1;color:#6366f1;background:#f0f0ff}
+.sm-table{width:100%;border-collapse:collapse}
+.sm-table th{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink4);padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);background:var(--surface);white-space:nowrap;cursor:pointer;user-select:none}
+.sm-table th:hover{color:var(--ink)}
+.sm-table td{padding:11px 12px;border-bottom:1px solid var(--border);vertical-align:middle;font-size:13px}
+.sm-table tr:last-child td{border-bottom:none}
+.sm-table tr.sm-main:hover td{background:var(--surface)}
+.sm-plat-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:4px;font-size:11px;font-weight:700;border:1px solid;white-space:nowrap}
+.sm-plat-badge img{width:12px;height:12px;border-radius:2px}
+.sm-type-badge{display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap}
+.sm-type-creator{background:#fef3c7;color:#92400e}
+.sm-type-business{background:#dbeafe;color:#1e40af}
+.sm-type-community{background:#f3e8ff;color:#7e22ce}
+.sm-handle-cell{display:flex;align-items:center;gap:10px}
+.sm-avatar{width:34px;height:34px;border-radius:50%;flex-shrink:0;background:var(--surface-alt);object-fit:cover}
+.sm-handle-name{font-size:13px;font-weight:600;color:var(--ink);display:block}
+.sm-handle-sub{font-size:11px;color:var(--ink4);display:block}
+.sm-followers{font-size:13px;font-weight:600;color:var(--ink)}
+.sm-followers-na{font-size:12px;color:var(--ink4);font-style:italic}
+.sm-cite-num{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:26px;padding:0 8px;border-radius:4px;font-size:14px;font-weight:700;font-family:monospace;background:var(--surface);color:var(--ink)}
+.sm-cite-num.high{background:#fff7ed;color:#c2410c}
+.sm-model-dots{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.sm-mdot{width:20px;height:20px;border-radius:4px;flex-shrink:0;object-fit:contain;background:var(--surface-alt)}
+.sm-expand-row td{padding:0}
+.sm-expand-body{padding:10px 12px 14px 58px;background:color-mix(in srgb,#6366f1 3%,white);border-bottom:1px solid var(--border)}
+.sm-cite-item{padding:7px 0;border-bottom:1px solid var(--border2);display:grid;grid-template-columns:1fr auto;gap:8px;align-items:start}
+.sm-cite-item:last-child{border-bottom:none}
+.sm-cite-prompt{font-size:12px;color:var(--ink);font-weight:500}
+.sm-cite-url{font-size:10px;color:var(--ink4);font-family:monospace;max-width:480px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;margin-top:2px}
+.sm-cite-model{font-size:10px;color:var(--ink3);font-weight:600;white-space:nowrap}
+.sm-expand-toggle{background:none;border:none;cursor:pointer;color:var(--ink4);font-size:12px;padding:2px 6px;border-radius:3px}
+.sm-expand-toggle:hover{background:var(--border);color:var(--ink)}
+.sm-insight-box{border-radius:8px;padding:16px 20px;background:color-mix(in srgb,#f59e0b 8%,white);border:1px solid color-mix(in srgb,#f59e0b 25%,white);margin-bottom:20px}
+.sm-insight-box h4{margin:0 0 6px;font-size:13px;font-weight:700;color:#92400e}
+.sm-insight-box p{margin:0;font-size:13px;color:#78350f;line-height:1.5}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YV8FCLN403"></script>
@@ -295,6 +350,7 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
     <button class="stab" onclick="switchTab('sentiment',this)">Sentiment</button>
     <button class="stab" onclick="switchTab('competitors',this)">Competitors</button>
     <button class="stab" onclick="switchTab('citations',this)">Citations</button>
+    <button class="stab" onclick="switchTab('social',this)">Social Media</button>
     <button class="stab" onclick="switchTab('actions',this)">Actions</button>
   </div>
 </nav>
@@ -349,6 +405,7 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
   </div>
 </div>
 <div id="panel-citations" class="panel"><div id="citContent"></div></div>
+<div id="panel-social" class="panel"><div id="socialContent"></div></div>
 <div id="panel-actions" class="panel">
   <div class="cc">
     <div class="act-filters" id="actFilters">
@@ -563,7 +620,7 @@ function setTimeRange(range,btn){
 
 function setBrand(b,btn){currentBrand=b;sortCol='visibility';sortDir='desc';['prompt','visibility','position','sentiment','competitors'].forEach(function(c){var arr=document.getElementById('sa-'+c);var th=document.getElementById('th-'+c);if(!arr||!th)return;if(c==='visibility'){th.classList.add('sorted');arr.classList.add('sorted');arr.innerHTML='&#8595;';}else{th.classList.remove('sorted');arr.classList.remove('sorted');arr.innerHTML='&#8597;';}});document.querySelectorAll('.bt-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');_applyTimeRange();renderAll();}
 function setModel(m,btn){activeModel=m;document.querySelectorAll('.mb-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderAll();}
-function switchTab(t,btn){document.querySelectorAll('.stab').forEach(x=>x.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));document.getElementById('panel-'+t).classList.add('active');}
+function switchTab(t,btn){document.querySelectorAll('.stab').forEach(x=>x.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));document.getElementById('panel-'+t).classList.add('active');if(t==='social')renderSocial();}
 function renderAll(){renderStats();renderOverview();renderPrompts();renderSentiment();renderCompetitors();renderCitations();renderActionsGrid();}
 function fav(d,sz){return 'https://www.google.com/s2/favicons?domain='+d+'&sz='+(sz||32);}
 function favImg(d,cls,tip){return '<span class="fav-wrap" data-tip="'+(tip||d)+'"><img class="'+(cls||'act-fav')+'" src="'+fav(d)+'" onerror="this.style.display=\'none\'"></span>';}
@@ -1253,6 +1310,346 @@ function renderActionsGrid(){
 function toggleAct(id){var card=document.getElementById(id);var wasCollapsed=card.classList.contains('collapsed');document.querySelectorAll('.act-card').forEach(function(c){c.classList.add('collapsed');});if(wasCollapsed)card.classList.remove('collapsed');}
 _applyTimeRange();
 renderAll();
+
+
+/* ── Social Media Tab ─────────────────────────────────────────────────────── */
+const SM_PROFILES = {
+  // Instagram
+  "denvertanningclub":{"name":"Denver Tanning Club","handle":"@denvertanningclub","type":"business","followers":2405,"location":"Denver, CO","platform":"instagram"},
+  "goldenhour_denver":{"name":"Golden Hour Denver","handle":"@goldenhour_denver","type":"business","followers":2824,"location":"Denver, CO","platform":"instagram"},
+  "dayglowtans":{"name":"Day Glow Tans (Katie Day)","handle":"@dayglowtans","type":"creator","followers":1143,"location":"Denver, CO","platform":"instagram"},
+  "sunstudiotan614":{"name":"Sun Studio Tan","handle":"@sunstudiotan614","type":"business","followers":104,"location":"Columbus, OH","platform":"instagram"},
+  "the.bronzing.bar":{"name":"The Bronzing Bar","handle":"@the.bronzing.bar","type":"business","followers":4487,"location":"Columbus, OH","platform":"instagram"},
+  "sweetlybronzed":{"name":"Sweetly Bronzed","handle":"@sweetlybronzed","type":"business","followers":5277,"location":"Columbus, OH","platform":"instagram"},
+  "ontheglowcustomspraytanning":{"name":"On The Glow (Cassie)","handle":"@ontheglowcustomspraytanning","type":"creator","followers":718,"location":"Columbus, OH","platform":"instagram"},
+  "flawlesstansdallas":{"name":"Flawless Tans Dallas","handle":"@flawlesstansdallas","type":"business","followers":5077,"location":"Dallas, TX","platform":"instagram"},
+  "bronzebeautybardtx":{"name":"Bronze Beauty Bar","handle":"@bronzebeautybardtx","type":"business","followers":3411,"location":"Dallas, TX","platform":"instagram"},
+  "tan_dallas":{"name":"Tan Dallas","handle":"@tan_dallas","type":"business","followers":189,"location":"Dallas, TX","platform":"instagram"},
+  "glowjobdallas":{"name":"Glow Job Dallas","handle":"@glowjobdallas","type":"business","followers":4547,"location":"Dallas, TX","platform":"instagram"},
+  // Facebook pages
+  "sinlesssun":{"name":"Sinless Sun Spray Tanning","handle":"sinlesssun","type":"business","followers":3700,"location":"Denver, CO","platform":"facebook"},
+  "leetsdale":{"name":"Glo Tanning (Leetsdale)","handle":"leetsdale","type":"business","followers":291,"location":"Denver, CO","platform":"facebook"},
+  "tanning.denver":{"name":"Glo Tanning Colorado","handle":"tanning.denver","type":"business","followers":8100,"location":"Denver, CO","platform":"facebook"},
+  "bringmebronze":{"name":"Bring Me Bronze","handle":"bringmebronze","type":"business","followers":488,"location":"Denver, CO","platform":"facebook"},
+  "Illbeyourweakness":{"name":"Radiance Tan","handle":"Illbeyourweakness","type":"business","followers":null,"location":"Columbus, OH","platform":"facebook"},
+  "solairesunspray":{"name":"Solaire Sun Spray","handle":"solairesunspray","type":"business","followers":1400,"location":"Columbus, OH","platform":"facebook"},
+  "tanatsunstudio":{"name":"Sun Studio Tan","handle":"tanatsunstudio","type":"business","followers":1800,"location":"Columbus, OH","platform":"facebook"},
+  "pureglowtanningmockingbirdstation":{"name":"PureGlow Tanning","handle":"pureglowtanningmockingbirdstation","type":"business","followers":null,"location":"Dallas, TX","platform":"facebook"},
+  "bronzebeautybardallas":{"name":"Bronze Beauty Bar Dallas","handle":"bronzebeautybardallas","type":"business","followers":167,"location":"Dallas, TX","platform":"facebook"},
+  "thebronzebabe":{"name":"The Bronze Babe","handle":"thebronzebabe","type":"business","followers":null,"location":"Dallas, TX","platform":"facebook"},
+  // Facebook communities
+  "395341440904564":{"name":"Denver Spray Tan Community","handle":"Facebook Group","type":"community","followers":null,"location":"Denver, CO","platform":"facebook"},
+  "BackMountainCommunityPage":{"name":"Back Mountain Community","handle":"Facebook Group","type":"community","followers":null,"location":"Dallas, TX","platform":"facebook"},
+  "whatshappeningindallasgeorgia":{"name":"What's Happening in Dallas","handle":"Facebook Group","type":"community","followers":null,"location":"Dallas, TX","platform":"facebook"},
+  // TikTok
+  "samanthataormina":{"name":"Samantha Taormina","handle":"@samanthataormina","type":"creator","followers":603600,"location":"US","platform":"tiktok"},
+  // YouTube
+  "_youtube_sunstudio":{"name":"Sun Studio Tan","handle":"YouTube Channel","type":"business","followers":null,"location":"Columbus, OH","platform":"youtube"}
+};
+
+const SM_PLAT_COLORS = {
+  instagram:{color:"#C13584",bg:"#FDF0F5",domain:"instagram.com",label:"Instagram"},
+  facebook:{color:"#1877F2",bg:"#EEF4FE",domain:"facebook.com",label:"Facebook"},
+  youtube:{color:"#FF0000",bg:"#FFF0F0",domain:"youtube.com",label:"YouTube"},
+  tiktok:{color:"#010101",bg:"#F0F0F0",domain:"tiktok.com",label:"TikTok"}
+};
+
+const SM_MODEL_META = {
+  "google-aio":{label:"Google AIO",domain:"google.com"},
+  "google-ai-mode":{label:"Google AI Mode",domain:"google.com"},
+  "sonar":{label:"Perplexity",domain:"perplexity.ai"},
+  "gpt-4o-mini":{label:"ChatGPT",domain:"openai.com"},
+  "gemini-2.5-flash":{label:"Gemini",domain:"gemini.google.com"}
+};
+
+let smActivePlat = 'all';
+let smSortCol = 'cites';
+let smSortDir = -1;
+let smExpandedRows = new Set();
+
+function _smExtractHandle(url, platform) {
+  try {
+    const u = new URL(url);
+    const parts = u.pathname.split('/').filter(Boolean);
+    if (platform === 'instagram') {
+      if (parts[0] === 'p' || parts[0] === 'reel') return '__post__';
+      return parts[0] || '__unknown__';
+    }
+    if (platform === 'facebook') {
+      if (parts[0] === 'groups') return parts[1] || '__group__';
+      if (parts[0] === 'pages') return parts[1] || '__page__';
+      if (parts.length && !['share','sharer','login','watch'].includes(parts[0])) {
+        const slug = parts[0];
+        // exclude numeric-only (not group IDs already handled)
+        return slug;
+      }
+      return '__unknown__';
+    }
+    if (platform === 'tiktok') {
+      const h = parts[0];
+      return h ? h.replace('@','') : '__unknown__';
+    }
+    if (platform === 'youtube') {
+      return '_youtube_sunstudio';
+    }
+  } catch(e) {}
+  return '__unknown__';
+}
+
+function _smGetPlatform(url) {
+  if (/instagram\.com/i.test(url)) return 'instagram';
+  if (/facebook\.com/i.test(url)) return 'facebook';
+  if (/tiktok\.com/i.test(url)) return 'tiktok';
+  // YouTube: only match youtube.com as a full domain, not substring
+  if (/(?:^|\.)youtube\.com/i.test(url) || url === 'https://youtube.com') return 'youtube';
+  return null;
+}
+
+function _smBuildData() {
+  const rh = RAW_HISTORY[Object.keys(RAW_HISTORY)[0]];
+  const byHandle = {}; // handle -> {platform, handle, cites, models:Set, citationsList:[]}
+
+  for (const prompt of rh.prompts) {
+    for (const entry of (prompt.entries || [])) {
+      const model = entry.model || entry.mdl || 'unknown';
+      for (const src of (entry.srcs || [])) {
+        const url = src.u || '';
+        const plat = _smGetPlatform(url);
+        if (!plat) continue;
+        const handle = _smExtractHandle(url, plat);
+        const key = handle === '__post__' ? `__ig_post__${url.slice(-12)}` : handle;
+        if (!byHandle[key]) {
+          byHandle[key] = {handle: key, platform: plat, cites:0, models: new Set(), citationsList:[]};
+        }
+        byHandle[key].cites++;
+        byHandle[key].models.add(model);
+        // avoid duplicate prompt+model+url
+        const dup = byHandle[key].citationsList.find(c => c.url===url && c.model===model);
+        if (!dup) {
+          byHandle[key].citationsList.push({
+            prompt: prompt.text || '',
+            url,
+            title: src.t || '',
+            model,
+            date: entry.date || ''
+          });
+        }
+      }
+    }
+  }
+
+  // Merge with profile data
+  return Object.values(byHandle).map(row => {
+    const prof = SM_PROFILES[row.handle] || SM_PROFILES[row.handle.replace('@','')] || null;
+    const isPost = row.handle.startsWith('__ig_post__') || row.handle.startsWith('__');
+    return {
+      ...row,
+      models: [...row.models],
+      name: prof ? prof.name : (isPost ? 'Post / Reel' : row.handle),
+      type: prof ? prof.type : (isPost ? 'post' : 'business'),
+      followers: prof ? prof.followers : null,
+      location: prof ? prof.location : '',
+      profileUrl: row.platform === 'instagram' ? `https://instagram.com/${row.handle}` :
+                  row.platform === 'facebook' ? `https://facebook.com/${row.handle}` :
+                  row.platform === 'tiktok' ? `https://tiktok.com/@${row.handle}` : `https://youtube.com`
+    };
+  });
+}
+
+function renderSocial() {
+  const el = document.getElementById('socialContent');
+  if (!el) return;
+  const allRows = _smBuildData();
+
+  // Platform counts
+  const platCounts = {all: allRows.reduce((s,r)=>s+r.cites,0)};
+  for (const r of allRows) platCounts[r.platform] = (platCounts[r.platform]||0) + r.cites;
+  const accountCounts = {all: allRows.length};
+  for (const r of allRows) accountCounts[r.platform] = (accountCounts[r.platform]||0) + 1;
+
+  const filtered = smActivePlat === 'all' ? allRows : allRows.filter(r => r.platform === smActivePlat);
+  const maxCites = filtered.reduce((m,r) => Math.max(m, r.cites), 0);
+
+  const sorted = [...filtered].sort((a,b) => {
+    if (smSortCol === 'cites') return smSortDir * (b.cites - a.cites);
+    if (smSortCol === 'followers') {
+      const af = a.followers ?? -1, bf = b.followers ?? -1;
+      return smSortDir * (bf - af);
+    }
+    if (smSortCol === 'platform') return smSortDir * a.platform.localeCompare(b.platform);
+    if (smSortCol === 'name') return smSortDir * a.name.localeCompare(b.name);
+    if (smSortCol === 'type') return smSortDir * (a.type||'').localeCompare(b.type||'');
+    return 0;
+  });
+
+  const fmtFollowers = n => {
+    if (n === null || n === undefined) return '<span class="sm-followers-na">N/A</span>';
+    if (n >= 1000000) return '<span class="sm-followers">'+(n/1000000).toFixed(1)+'M</span>';
+    if (n >= 1000) return '<span class="sm-followers">'+(n/1000).toFixed(1)+'K</span>';
+    return '<span class="sm-followers">'+n.toLocaleString()+'</span>';
+  };
+
+  const platBtns = ['all','instagram','facebook','youtube','tiktok'].map(p => {
+    const pc = SM_PLAT_COLORS[p] || {};
+    const ac = p === 'all' ? '#6366f1' : pc.color;
+    const cnt = platCounts[p] || 0;
+    if (p !== 'all' && !cnt) return '';
+    const ico = p === 'all' ? '' : `<img src="https://www.google.com/s2/favicons?domain=${pc.domain}&sz=32" onerror="this.style.display='none'">`;
+    const lbl = p === 'all' ? 'All Platforms' : pc.label;
+    return `<button class="sm-fbtn${smActivePlat===p?' active':''}" style="--ac:${ac}" onclick="smSetPlat('${p}',this)">
+      ${ico}<span>${lbl}</span><span class="sm-pill-count" style="--ac:${ac}">${cnt}</span>
+    </button>`;
+  }).join('');
+
+  const thArr = [
+    {k:'platform',l:'Platform'},
+    {k:'name',l:'Account / Handle'},
+    {k:'type',l:'Type'},
+    {k:'followers',l:'Followers'},
+    {k:'cites',l:'AI Cites'},
+    {k:'models_',l:'AI Models'},
+    {k:'location_',l:'City'}
+  ];
+  const ths = thArr.map(h => {
+    if (h.k.endsWith('_')) return `<th>${h.l}</th>`;
+    const arr = smSortCol===h.k ? (smSortDir<0?'▼':'▲') : '⇅';
+    return `<th onclick="smSetSort('${h.k}')">${h.l} <span style="opacity:.5;font-size:9px">${arr}</span></th>`;
+  }).join('');
+
+  const rows = sorted.map((r,i) => {
+    const pc = SM_PLAT_COLORS[r.platform] || {color:'#888',bg:'#f0f0f0',label:r.platform,domain:r.platform+'.com'};
+    const platBadge = `<span class="sm-plat-badge" style="color:${pc.color};background:${pc.bg};border-color:${pc.color}22">
+      <img src="https://www.google.com/s2/favicons?domain=${pc.domain}&sz=32" style="width:12px;height:12px;border-radius:2px" onerror="this.style.display='none'">
+      ${pc.label}
+    </span>`;
+
+    const typeCls = r.type === 'creator' ? 'sm-type-creator' : r.type === 'community' ? 'sm-type-community' : 'sm-type-business';
+    const typeLabel = r.type === 'creator' ? 'Creator' : r.type === 'community' ? 'Community' : 'Business';
+    const typeBadge = `<span class="sm-type-badge ${typeCls}">${typeLabel}</span>`;
+
+    const avatarDomain = r.platform === 'instagram' ? 'instagram.com' :
+                         r.platform === 'facebook' ? 'facebook.com' :
+                         r.platform === 'tiktok' ? 'tiktok.com' : 'youtube.com';
+    const handleDisplay = r.handle.startsWith('__ig_post__') ? 'Post / Reel' : r.handle;
+    const handleLink = r.handle.startsWith('__') ? '' : ` href="${r.profileUrl}" target="_blank" rel="noopener"`;
+
+    const handleCell = `<div class="sm-handle-cell">
+      <img class="sm-avatar" src="https://www.google.com/s2/favicons?domain=${avatarDomain}&sz=32" onerror="this.style.display='none'" style="border-radius:6px;width:32px;height:32px">
+      <div>
+        <a${handleLink} style="font-size:13px;font-weight:600;color:var(--ink);text-decoration:none">${r.name}</a>
+        <span class="sm-handle-sub">${handleDisplay}</span>
+      </div>
+    </div>`;
+
+    const modelDots = r.models.map(m => {
+      const mm = SM_MODEL_META[m] || {label:m,domain:'google.com'};
+      return `<img class="sm-mdot" src="https://www.google.com/s2/favicons?domain=${mm.domain}&sz=32" title="${mm.label}" onerror="this.style.display='none'" style="width:18px;height:18px;border-radius:3px">`;
+    }).join('');
+
+    const isHigh = r.cites >= Math.max(2, maxCites * 0.5);
+    const citeBadge = `<span class="sm-cite-num${isHigh?' high':''}">${r.cites}</span>`;
+
+    const expandId = `sm-exp-${i}`;
+    const citationsHtml = r.citationsList.slice(0,8).map(c => {
+      const mm = SM_MODEL_META[c.model] || {label:c.model,domain:'google.com'};
+      const shortUrl = c.url.replace(/^https?:\/\//,'').slice(0,70) + (c.url.length > 75 ? '…' : '');
+      return `<div class="sm-cite-item">
+        <div>
+          <div class="sm-cite-prompt">${c.prompt}</div>
+          <a href="${c.url}" target="_blank" rel="noopener" class="sm-cite-url">${shortUrl}</a>
+          ${c.title ? `<span style="font-size:11px;color:var(--ink3);display:block;margin-top:2px">${c.title.slice(0,90)}</span>` : ''}
+        </div>
+        <div class="sm-cite-model">${mm.label}</div>
+      </div>`;
+    }).join('');
+
+    const expandBtn = `<button class="sm-expand-toggle" onclick="smToggleExpand('${expandId}',this)" title="Show citations">▼ ${r.cites}</button>`;
+
+    return `<tr class="sm-main" style="background:${i%2===0?'var(--paper)':'var(--surface)'}">
+      <td>${platBadge}</td>
+      <td>${handleCell}</td>
+      <td>${typeBadge}</td>
+      <td>${fmtFollowers(r.followers)}</td>
+      <td>${citeBadge}</td>
+      <td><div class="sm-model-dots">${modelDots}</div></td>
+      <td style="color:var(--ink4);font-size:12px">${r.location}</td>
+      <td>${expandBtn}</td>
+    </tr>
+    <tr id="${expandId}" style="display:none">
+      <td colspan="8"><div class="sm-expand-body">${citationsHtml}</div></td>
+    </tr>`;
+  }).join('');
+
+  const totalCites = filtered.reduce((s,r)=>s+r.cites,0);
+
+  el.innerHTML = `
+  <div class="cc">
+    <div class="cc-head">
+      <div>
+        <div class="cc-title">Social Media Citations</div>
+        <div class="cc-sub">social accounts cited by AI models in Palm Beach Tan-related queries</div>
+      </div>
+    </div>
+    <div class="cc-body">
+
+      <div class="sm-insight-box">
+        <h4>Key Finding</h4>
+        <p>Palm Beach Tan has <strong>zero</strong> social media citations. Competitors' Instagram and Facebook profiles are being surfaced by Google AIO, Google AI Mode, and Perplexity across ${platCounts.all} citations — for prompts like "Best VersaSpa spray tan" and "Best tanning salon in Denver" where Palm Beach Tan should be the definitive answer.</p>
+      </div>
+
+      <div class="sm-stats-band">
+        <div class="sm-stat-card"><div class="sm-stat-num">${platCounts.all||0}</div><div class="sm-stat-label">Total Citations</div></div>
+        <div class="sm-stat-card"><div class="sm-stat-num" style="color:#C13584">${platCounts.instagram||0}</div><div class="sm-stat-label">Instagram</div></div>
+        <div class="sm-stat-card"><div class="sm-stat-num" style="color:#1877F2">${platCounts.facebook||0}</div><div class="sm-stat-label">Facebook</div></div>
+        <div class="sm-stat-card"><div class="sm-stat-num" style="color:#FF0000">${platCounts.youtube||0}</div><div class="sm-stat-label">YouTube</div></div>
+        <div class="sm-stat-card"><div class="sm-stat-num" style="color:#010101">${platCounts.tiktok||0}</div><div class="sm-stat-label">TikTok</div></div>
+        <div class="sm-stat-card"><div class="sm-stat-num">${allRows.filter(r=>r.type==='creator').reduce((s,r)=>s+r.cites,0)}</div><div class="sm-stat-label">Creator Citations</div></div>
+        <div class="sm-stat-card"><div class="sm-stat-num">${allRows.filter(r=>r.type==='business').reduce((s,r)=>s+r.cites,0)}</div><div class="sm-stat-label">Business Page Citations</div></div>
+      </div>
+
+      <div class="sm-filter-row">
+        <span class="sm-filter-label">Platform:</span>
+        ${platBtns}
+      </div>
+
+      <div class="sm-results-bar">
+        <div class="sm-results-count">Showing <strong>${sorted.length}</strong> accounts &nbsp;·&nbsp; <strong>${totalCites}</strong> total AI citations</div>
+        <div class="sm-sort-row">
+          <span class="sm-sort-label">Sort:</span>
+          ${['cites','followers','name','type'].map(k=>`<button class="sm-sort-btn${smSortCol===k?' active':''}" onclick="smSetSort('${k}')">${k==='cites'?'Most Cited':k==='followers'?'Followers':k==='name'?'Name':'Type'}</button>`).join('')}
+        </div>
+      </div>
+
+      <div style="overflow-x:auto">
+        <table class="sm-table">
+          <thead><tr>${ths}<th></th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+    </div>
+  </div>`;
+}
+
+function smSetPlat(p, btn) {
+  smActivePlat = p;
+  smExpandedRows.clear();
+  renderSocial();
+}
+
+function smSetSort(col) {
+  if (smSortCol === col) smSortDir *= -1;
+  else { smSortCol = col; smSortDir = -1; }
+  renderSocial();
+}
+
+function smToggleExpand(id, btn) {
+  const row = document.getElementById(id);
+  if (!row) return;
+  const open = row.style.display !== 'none';
+  row.style.display = open ? 'none' : 'table-row';
+  btn.textContent = open ? ('▼ ' + btn.textContent.split(' ')[1]) : ('▲ ' + btn.textContent.split(' ')[1]);
+}
+
 </script>
 </body>
 </html>
