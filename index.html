@@ -302,6 +302,19 @@ tr.dom-row-open .dom-chev{transform:rotate(180deg)}
 .sm-insight-box{border-radius:8px;padding:16px 20px;background:color-mix(in srgb,#f59e0b 8%,white);border:1px solid color-mix(in srgb,#f59e0b 25%,white);margin-bottom:20px}
 .sm-insight-box h4{margin:0 0 6px;font-size:13px;font-weight:700;color:#92400e}
 .sm-insight-box p{margin:0;font-size:13px;color:#78350f;line-height:1.5}
+.sm-gap-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+.sm-gap-panel{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px 18px;display:flex;flex-direction:column}
+.sm-gap-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--ink4);margin-bottom:12px}
+.sm-gap-handle{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)}
+.sm-gap-handle:last-child{border-bottom:none}
+.sm-gap-cite-num{font-size:13px;font-weight:700;font-family:monospace;color:#C13584;min-width:30px;text-align:right;flex-shrink:0}
+.sm-reddit-card{background:var(--paper);border:1px solid var(--border);border-radius:8px;padding:16px 18px;margin-bottom:20px}
+.sm-reddit-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.sm-reddit-body-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.sm-reddit-pill{display:flex;align-items:center;gap:8px;padding:8px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px}
+.sm-reddit-pill-name{font-size:13px;font-weight:700;color:#FF4500}
+.sm-reddit-pill-cnt{font-size:12px;color:var(--ink3)}
+@media(max-width:780px){.sm-gap-grid{grid-template-columns:1fr}}
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
@@ -1570,6 +1583,53 @@ function renderSocial() {
   const totalCites = filtered.reduce((s,r)=>s+r.cites,0);
   const modelLabel = activeModel==='all' ? 'all models' : (SM_MODEL_META[activeModel]||{label:activeModel}).label;
 
+  const igTop = allRows.filter(r=>r.platform==='instagram'&&!r.handle.startsWith('__')).sort((a,b)=>b.cites-a.cites).slice(0,5);
+  const igGapRows = igTop.map(r=>`<div class="sm-gap-handle">
+    <img src="https://www.google.com/s2/favicons?domain=instagram.com&sz=32" style="width:22px;height:22px;border-radius:4px;flex-shrink:0" onerror="this.style.display='none'">
+    <div style="flex:1;min-width:0">
+      <span style="font-size:12px;font-weight:600;color:var(--ink);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${r.name}</span>
+      <span style="font-size:11px;color:var(--ink4)">${r.handle}&nbsp;&middot;&nbsp;${r.location||''}</span>
+    </div>
+    <span class="sm-gap-cite-num">${r.cites}&times;</span>
+  </div>`).join('');
+
+  const gapSection = `<div class="sm-gap-grid">
+    <div class="sm-gap-panel">
+      <div class="sm-gap-title">Top Cited Competitor Instagram Accounts</div>
+      ${igGapRows}
+      <div style="margin-top:12px;font-size:11px;color:var(--ink3);line-height:1.5">Competitor pages cited in AI responses across Denver, Dallas, and Columbus markets.</div>
+    </div>
+    <div class="sm-gap-panel">
+      <div class="sm-gap-title">Palm Beach Tan Social Presence in AI</div>
+      <div style="display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;padding:18px 0;flex:1">
+        <div style="font-size:44px;font-weight:800;color:var(--bad);line-height:1">0</div>
+        <div style="font-size:12px;color:var(--ink3);text-align:center;line-height:1.4;margin-top:6px">PBT social pages cited<br>across ${totalUnfiltered} total social citations</div>
+      </div>
+      <div style="background:var(--bad-bg);border:1px solid #fecaca;border-radius:6px;padding:10px 12px;font-size:12px;color:#991b1b;line-height:1.5;margin-top:auto">
+        AI models are discovering and citing competitor social profiles but no Palm Beach Tan Instagram or Facebook pages appear in any response. Location-tagged content and consistent posting directly improves AI discoverability.
+      </div>
+    </div>
+  </div>`;
+
+  const redditSection = `<div class="sm-reddit-card">
+    <div class="sm-reddit-head">
+      <img src="https://www.google.com/s2/favicons?domain=reddit.com&sz=32" style="width:28px;height:28px;border-radius:6px;flex-shrink:0" onerror="this.style.display='none'">
+      <div>
+        <div style="font-size:13px;font-weight:700;color:var(--ink)">Reddit Community Signals: 49 Citations</div>
+        <div style="font-size:12px;color:var(--ink4)">Reddit threads are shaping AI responses in key Palm Beach Tan markets</div>
+      </div>
+    </div>
+    <div class="sm-reddit-body-row">
+      <div class="sm-reddit-pill"><span class="sm-reddit-pill-name">r/Columbus</span><span class="sm-reddit-pill-cnt">41 AI citations</span></div>
+      <div class="sm-reddit-pill"><span class="sm-reddit-pill-name">r/Denver</span><span class="sm-reddit-pill-cnt">6 AI citations</span></div>
+      <div class="sm-reddit-pill"><span class="sm-reddit-pill-name">r/Dallas</span><span class="sm-reddit-pill-cnt">2 AI citations</span></div>
+      <div class="sm-reddit-pill"><span class="sm-reddit-pill-name">r/tanning</span><span class="sm-reddit-pill-cnt">1 AI citation</span></div>
+    </div>
+    <div style="font-size:12px;color:var(--ink3);line-height:1.5;background:var(--surface);border-radius:6px;padding:10px 12px">
+      City subreddit discussions about local tanning salons are among the most-cited sources in AI answers. Engaging in r/Columbus, r/Denver, and r/tanning threads would directly increase how often Palm Beach Tan appears in AI-generated responses. Full Reddit citation data is available in the Citations tab.
+    </div>
+  </div>`;
+
   el.innerHTML = `
   <div class="cc">
     <div class="cc-head">
@@ -1580,10 +1640,8 @@ function renderSocial() {
     </div>
     <div class="cc-body">
 
-      <div class="sm-insight-box">
-        <h4>Key Finding</h4>
-        <p>Palm Beach Tan has <strong>zero</strong> social media citations. Competitors' Instagram and Facebook profiles are being surfaced by Google AIO, Google AI Mode, and Perplexity across ${totalUnfiltered} citations, for prompts like "Best VersaSpa spray tan" and "Best tanning salon in Denver" where Palm Beach Tan should be the definitive answer.</p>
-      </div>
+      ${gapSection}
+      ${redditSection}
 
       <div class="sm-stats-band">
         <div class="sm-stat-card"><div class="sm-stat-num">${totalFiltered}</div><div class="sm-stat-label">Total Citations</div></div>
