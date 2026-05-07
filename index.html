@@ -1587,7 +1587,7 @@ function renderSocial() {
   const igGapRows = igTop.map(r=>`<div class="sm-gap-handle">
     <img src="https://www.google.com/s2/favicons?domain=instagram.com&sz=32" style="width:22px;height:22px;border-radius:4px;flex-shrink:0" onerror="this.style.display='none'">
     <div style="flex:1;min-width:0">
-      <span style="font-size:12px;font-weight:600;color:var(--ink);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${r.name}</span>
+      <a href="${r.profileUrl}" target="_blank" rel="noopener" style="font-size:12px;font-weight:600;color:var(--ink);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-decoration:none" onmouseover="this.style.color='#C13584'" onmouseout="this.style.color='var(--ink)'">${r.name}</a>
       <span style="font-size:11px;color:var(--ink4)">${r.handle}&nbsp;&middot;&nbsp;${r.location||''}</span>
     </div>
     <span class="sm-gap-cite-num">${r.cites}&times;</span>
