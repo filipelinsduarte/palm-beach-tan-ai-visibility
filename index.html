@@ -1372,6 +1372,7 @@ const SM_MODEL_META = {
 };
 
 let smActivePlat = 'all';
+let smActiveType = 'all';
 let smSortCol = 'followers';
 let smSortDir = -1;
 
@@ -1466,7 +1467,10 @@ function renderSocial() {
   })();
   const totalUnfiltered = Object.values(allRowsUnfiltered).reduce((s,v)=>s+v,0);
 
-  const filtered = smActivePlat === 'all' ? allRows : allRows.filter(r => r.platform === smActivePlat);
+  const filtered = allRows.filter(r =>
+    (smActivePlat === 'all' || r.platform === smActivePlat) &&
+    (smActiveType === 'all' || r.type === smActiveType)
+  );
   const maxCites = filtered.reduce((m,r) => Math.max(m, r.cites), 0);
 
   const sorted = [...filtered].sort((a,b) => {
@@ -1502,6 +1506,18 @@ function renderSocial() {
     </button>`;
   }).join('');
 
+  const typeLabels = {all:'All Types',business:'Business',creator:'Creator',community:'Community',post:'Posts & Reels'};
+  const typeColors = {all:'#6366f1',business:'#1e40af',creator:'#92400e',community:'#7e22ce',post:'#C13584'};
+  const typeCounts = allRows.reduce((acc,r)=>{acc[r.type]=(acc[r.type]||0)+1;return acc;},{});
+  const typeBtns = ['all','business','creator','community','post'].map(t => {
+    const cnt = t==='all' ? allRows.length : (typeCounts[t]||0);
+    if (t!=='all' && !cnt) return '';
+    const ac = typeColors[t];
+    return `<button class="sm-fbtn${smActiveType===t?' active':''}" style="--ac:${ac}" onclick="smSetType('${t}')">
+      <span>${typeLabels[t]}</span><span class="sm-pill-count" style="--ac:${ac}">${cnt}</span>
+    </button>`;
+  }).join('');
+
   const thDefs = [
     {k:'__expand__',l:''},
     {k:'name',l:'Account / Handle'},
@@ -1528,12 +1544,20 @@ function renderSocial() {
     const typeCls = r.type==='creator' ? 'sm-type-creator' : r.type==='community' ? 'sm-type-community' : 'sm-type-business';
     const typeBadge = `<span class="sm-type-badge ${typeCls}">${r.subtype}</span>`;
 
-    const handleDisplay = r.handle.startsWith('__ig_post__') ? 'Post / Reel' : r.handle;
-    const hasLink = !r.handle.startsWith('__');
+    const isPost = r.handle.startsWith('__ig_post__');
+    const postUrl = isPost && r.citationsList[0] ? r.citationsList[0].url : null;
+    const postMatch = postUrl ? postUrl.match(/instagram\.com\/(p|reel)\/([^/?#]+)/i) : null;
+    const handleDisplay = isPost
+      ? (postMatch ? postMatch[1]+'/'+postMatch[2] : 'instagram post')
+      : r.handle;
+    const displayName = isPost
+      ? (postMatch && postMatch[1]==='reel' ? 'Instagram Reel' : 'Instagram Post')
+      : r.name;
+    const linkHref = isPost ? (postUrl || r.profileUrl) : r.profileUrl;
     const handleCell = `<div class="sm-handle-cell">
       <img src="https://www.google.com/s2/favicons?domain=${pc.domain}&sz=32" onerror="this.style.display='none'" style="width:32px;height:32px;border-radius:6px;flex-shrink:0;background:var(--surface-alt)">
       <div>
-        ${hasLink ? `<a href="${r.profileUrl}" target="_blank" rel="noopener" style="font-size:13px;font-weight:600;color:var(--ink);text-decoration:none">${r.name}</a>` : `<span style="font-size:13px;font-weight:600;color:var(--ink)">${r.name}</span>`}
+        <a href="${linkHref}" target="_blank" rel="noopener" style="font-size:13px;font-weight:600;color:var(--ink);text-decoration:none">${displayName}</a>
         <span style="font-size:11px;color:var(--ink4);display:block">${handleDisplay}</span>
       </div>
     </div>`;
@@ -1677,6 +1701,11 @@ function renderSocial() {
         ${platBtns}
       </div>
 
+      <div class="sm-filter-row" style="margin-bottom:14px">
+        <span class="sm-filter-label">Type:</span>
+        ${typeBtns}
+      </div>
+
       <div class="sm-results-bar">
         <div class="sm-results-count">Showing <strong>${sorted.length}</strong> accounts &nbsp;·&nbsp; <strong>${totalCites}</strong> AI citations${activeModel!=='all'?' via '+modelLabel:''}</div>
         <div class="sm-sort-row">
@@ -1697,6 +1726,11 @@ function renderSocial() {
 
 function smSetPlat(p) {
   smActivePlat = p;
+  renderSocial();
+}
+
+function smSetType(t) {
+  smActiveType = t;
   renderSocial();
 }
 
